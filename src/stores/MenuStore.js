@@ -1,3 +1,4 @@
+"use client"
 import { makeAutoObservable } from "mobx";
 
 
@@ -18,8 +19,6 @@ class MenuStore{
 
     userBoard = [] ;              // 서버에서 가져온 userboard
     publicTransport = [] ;        // 서버에서 가져온 대중교통
-    tradeBoard = null;
-    travelBoard =null;
     userInfo = {
         id:'',
         name : '',
@@ -29,8 +28,21 @@ class MenuStore{
         kakao : '',
         naver : '',
         google : '', 
-    }
+    };
 
+    tradeList = [];
+    detailTrade = {
+        idx : '',
+        id : '',
+        title : '' ,
+        content : '',
+        image : '',
+        image_size : '',
+        image_format : '',
+        created_at : '',
+        updated_at : ''
+    };
+    writeTrade = [];
 
     constructor(){
         // MobX 스토어를 자동으로 관찰 가능하게 설정
@@ -82,17 +94,20 @@ class MenuStore{
     setUserBoard(userBoard){
         this.userBoard = userBoard;
     }
-    setTradeBoard(tradeBoard){
-        this.tradeBoard = tradeBoard;
-    }
-    setTravelBoard(travelBoard){
-        this.travelBoard = travelBoard;
-    }
-    setPublicTransport(publicTransport){
-        this.publicTransport = publicTransport;
-    }
     setUserInfo(userInfo){
         this.userInfo = userInfo;
+    }
+    setTradeList(tradeList){
+        this.tradeList = tradeList;
+    }
+    setDetailTrade(detailTrade){
+        this.detailTrade = detailTrade;
+    }
+    setWriteTrade(writeTrade){
+        this.writeTrade = writeTrade;
+    }
+    setPublicInfo(publicInfo){
+        this.publicInfo = publicInfo;
     }
 }
 

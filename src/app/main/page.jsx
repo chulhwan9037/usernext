@@ -11,11 +11,12 @@ import { observer } from "mobx-react-lite";
 import { MenuContext } from "@/stores/StoreContext";
 import MainPage from "../mainpage/page";
 import UserBoard from "../userboard/page";
-import TradeBoard from "../tradeboard/page";
+import TradeList from "../tradeList/page";
 import PublicTransport from "../publictransport/page";
 import GuestDetail from "../guestDetail/page";
-import TravelBoard from "../travelboard/page";
 import UserDetail from "../userDetail/page";
+import DetailTrade from "../detailTrade/page";
+import WriteTrade from "../writeTrade/page";
 
 
 
@@ -51,11 +52,13 @@ function Main(){
           case "userboard" :
             return <UserBoard userBoard={menuStore.userBoard}/>;
           case "tradelist" :
-            return <TradeBoard tradeList={menuStore.tradeList}/>;
+            return <TradeList tradeList={menuStore.tradeList}/>;
+          case "detailtrade" :
+            return <DetailTrade detailTrade={menuStore.detailTrade}/>;
+          case "writetrade" :
+            return <WriteTrade writeTrade={menuStore.writeTrade}/>;
           case "publictransport" :
             return <PublicTransport publicTransport={menuStore.publicTransport}/>;
-          case "travelboard" :
-            return <TravelBoard travelBoard={menuStore.travelBoard}/>;
           case "userdetail" :
             return <UserDetail userDetail={menuStore.userDetail}/>;
           default:

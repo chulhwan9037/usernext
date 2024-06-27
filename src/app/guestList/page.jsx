@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useContext } from 'react';
 import { Box, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper } from '@mui/material';
 import Link from 'next/link';

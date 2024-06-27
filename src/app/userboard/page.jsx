@@ -1,3 +1,4 @@
+"use client"
 import { MenuContext } from "@/stores/StoreContext";
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";

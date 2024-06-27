@@ -1,11 +1,12 @@
-"user client"
+"use client"
 
-import { MenuContext } from "@/stores/StoreContext";
 import { Container, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
-import { observer } from "mobx-react-lite";
-import { useContext } from "react";
 
 export default function UserDetail({userInfo}) {
+
+    if (!userInfo) {
+        return <Typography variant="h6">Loading...</Typography>;
+    }
 
     const { id, name, email, provider ,phone} = userInfo;
 

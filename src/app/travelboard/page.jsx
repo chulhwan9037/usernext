@@ -1,3 +1,4 @@
+"use client"
 import { MenuContext } from "@/stores/StoreContext";
 import axios from "axios";
 import { observer } from "mobx-react-lite";

@@ -24,6 +24,7 @@ function Sidebar(){
                     }
                 });
                 // 가지고 온 리스트를 MobX에 저장하자
+                console.log("data",response.data)
                 menuStore.setGuestList(response.data)
             } catch (error) {
                 alert("실패")
@@ -40,39 +41,28 @@ function Sidebar(){
             } catch (error) {
                 alert("실패")
             }
-        }else if(menu === "tradeboard"){
+        }else if(menu === "tradelist"){
             try {
-                const response = await axios.get("/api/trade",{
+                console.log("여기는올까?")
+                const response = await axios.get("/api/tradeboard",{
                     headers :{
                         Authorization:  `Bearer ${menuStore.token}`
                     }
                 });
                 // 가지고 온 리스트를 MobX에 저장하자
-                menuStore.setTradeBoard(response.data)
+                menuStore.setTradeList(response.data)
             } catch (error) {
                 alert("실패")
             }
-        }else if(menu === "travelboard"){
+        }else if(menu === "public"){
             try {
-                const response = await axios.get("/api/travel",{
+                const response = await axios.get("/api/public",{
                     headers :{
                         Authorization:  `Bearer ${menuStore.token}`
                     }
                 });
                 // 가지고 온 리스트를 MobX에 저장하자
-                menuStore.setTravelBoard(response.data)
-            } catch (error) {
-                alert("실패")
-            }
-        }else if(menu === "publictransport"){
-            try {
-                const response = await axios.get("/api/publictransport",{
-                    headers :{
-                        Authorization:  `Bearer ${menuStore.token}`
-                    }
-                });
-                // 가지고 온 리스트를 MobX에 저장하자
-                menuStore.setPublicTransport(response.data)
+                menuStore.setPublicInfo(response.data)
             } catch (error) {
                 alert("실패")
             }
@@ -93,15 +83,11 @@ function Sidebar(){
                 </ListItemButton>   
                 <ListItemButton onClick={() => handleMenuClick("tradelist")}>
                     <ListItemIcon><AccountCircle /></ListItemIcon>
-                    <ListItemText primary="중고거래게시판" />
+                    <ListItemText primary="Trade List" />
                 </ListItemButton>   
-                <ListItemButton onClick={() => handleMenuClick("travel")}>
+                <ListItemButton onClick={() => handleMenuClick("public")}>
                     <ListItemIcon><AccountCircle /></ListItemIcon>
-                    <ListItemText primary="김포여행지" />
-                </ListItemButton>   
-                <ListItemButton onClick={() => handleMenuClick("publictransport")}>
-                    <ListItemIcon><AccountCircle /></ListItemIcon>
-                    <ListItemText primary="김포교통정보" />
+                    <ListItemText primary="대중교통정보" />
                 </ListItemButton>   
             </List>    
         </div>

@@ -75,14 +75,32 @@ const Login = observer(() => {
         })
     }
 
-    function handleKakaoLogin(){
-        window.location.href="http://localhost:8080/oauth2/authorization/kakao"
+    function handleKakaoLogin() {
+    try {
+        window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
+    } catch (error) {
+        console.error("Kakao login error:", error);
     }
-    function handleNaverLogin(){
-        window.location.href="http://localhost:8080/oauth2/authorization/naver"
+}
+
+function handleNaverLogin() {
+    try {
+        window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+    } catch (error) {
+        console.error("Naver login error:", error);
     }
-    function handleGoogleLogin(){
-        window.location.href="http://localhost:8080/oauth2/authorization/google"
+}
+
+function handleGoogleLogin() {
+    try {
+        window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    } catch (error) {
+        console.error("Google login error:", error);
+    }
+}
+
+    function joinSite() {
+        router.push("/agreeWith");
     }
 
     return(
@@ -96,6 +114,7 @@ const Login = observer(() => {
                     <Button fullWidth variant='contained' onClick={handleKakaoLogin} >카카오 로그인</Button>
                     <Button fullWidth variant='contained' onClick={handleNaverLogin} >네이버 로그인</Button>
                     <Button fullWidth variant='contained' onClick={handleGoogleLogin} >google 로그인</Button>
+                    <Button fullWidth variant='contained' onClick={joinSite} >회원가입</Button>
                 </Stack>
             </FormControl>
          </div>

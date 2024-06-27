@@ -30,6 +30,18 @@ const nextConfig = {
                 destination : "http://localhost:8080/api/freeBoardDetail"
             },
             {
+                source : "/api/tradeboard",
+                destination : "http://localhost:8080/api/tradeboard"
+            },
+            {
+                source : "/api/detailTrade",
+                destination : "http://localhost:8080/api/detailTrade"
+            },
+            {
+                source : "/api/writeTrade",
+                destination : "http://localhost:8080/api/writeTrade"
+            },
+            {
                 source : "/api/public-data",
                 destination : "http://localhost:8080/api/public-data"
             }

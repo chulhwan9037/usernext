@@ -13,8 +13,7 @@ function TopBar({ setSidebarOpen, sidebarOpen }) {
     const router = useRouter();
     const API_URL = '/api/userInfo';
 
-    const handleUserDetail = async () => {
-        const menu = 'userdetail';
+    const handleUserDetail = async (menu) => {
         menuStore.setSelectedMenu(menu);
         if (menu === 'userdetail') {
             try {
@@ -62,7 +61,7 @@ function TopBar({ setSidebarOpen, sidebarOpen }) {
                     마을 모아
                 </Typography>
                 <Box sx={{ flexGrow: 1 }} />
-                <Button color="inherit" onClick={handleUserDetail}>MyPage</Button>
+                <Button color="inherit" onClick={()=> handleUserDetail("userdetail")}>MyPage</Button>
                 <Button color="inherit" onClick={handleLogout}>Logout</Button>
             </Toolbar>
         </AppBar>
