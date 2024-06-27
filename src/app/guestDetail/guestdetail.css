@@ -1,0 +1,54 @@
+/* guestDetail.css */
+
+.guest-detail-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.info-item {
+    margin-bottom: 15px;
+}
+
+.info-item label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.info-item p {
+    margin: 0;
+    padding-left: 10px;
+    border-left: 2px solid #3498db;
+}
+
+.info-name {
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+.info-subject {
+    font-size: 20px;
+    color: #34495e;
+}
+
+.info-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.info-email {
+    font-size: 14px;
+    color: #777;
+}
+
+.info-regdate {
+    font-size: 12px;
+    color: #999;
+}
