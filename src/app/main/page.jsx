@@ -17,6 +17,7 @@ import GuestDetail from "../guestDetail/page";
 import UserDetail from "../userDetail/page";
 import DetailTrade from "../detailTrade/page";
 import WriteTrade from "../writeTrade/page";
+import WriteFree from "../writefree/page";
 
 
 
@@ -57,6 +58,8 @@ function Main(){
             return <DetailTrade detailTrade={menuStore.detailTrade}/>;
           case "writetrade" :
             return <WriteTrade writeTrade={menuStore.writeTrade}/>;
+          case "writefree" :
+            return <WriteFree writeFree={menuStore.writeFree}/>;
           case "publictransport" :
             return <PublicTransport publicTransport={menuStore.publicTransport}/>;
           case "userdetail" :

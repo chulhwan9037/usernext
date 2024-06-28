@@ -9,17 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^42.0.0",
+    "@ckeditor/ckeditor5-react": "^8.0.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "axios": "^1.7.2",
+    "ckeditor5": "^42.0.0",
     "mobx": "^6.12.4",
     "mobx-react-lite": "^4.0.7",
     "next": "14.2.4",
     "next-images": "^1.8.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "eslint": "^8",

@@ -43,6 +43,8 @@ class MenuStore{
         updated_at : ''
     };
     writeTrade = [];
+    writeFree = [];
+
 
     constructor(){
         // MobX 스토어를 자동으로 관찰 가능하게 설정
@@ -106,9 +108,13 @@ class MenuStore{
     setWriteTrade(writeTrade){
         this.writeTrade = writeTrade;
     }
-    setPublicInfo(publicInfo){
-        this.publicInfo = publicInfo;
+    setWriteFree(writeFree){
+        this.writeFree = writeFree;
     }
+    setPublicTransport(publicTransport){
+        this.publicTransport = publicTransport;
+    }
+    
 }
 
 const menuStore = new MenuStore(); // 스토어 인스턴스 생성 

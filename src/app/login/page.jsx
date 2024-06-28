@@ -1,10 +1,11 @@
 "use client"
 
 import { MenuContext } from "@/stores/StoreContext";
-import { Avatar, Button, FormControl, Stack, TextField } from "@mui/material";
+import { Avatar, Button, FormControl, IconButton, Stack, TextField } from "@mui/material";
 import { green } from "@mui/material/colors";
 import axios from "axios";
 import { observer } from "mobx-react-lite";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
@@ -111,8 +112,12 @@ function handleGoogleLogin() {
                     <TextField type='text' label='ID' name='id' fullWidth  autoComplete="off" onChange={changeUvo} />
                     <TextField type='password' label='PW' name='password' fullWidth autoComplete="off" onChange={changeUvo} />
                     <Button fullWidth variant='contained' onClick={login} >Sign in</Button>
-                    <Button fullWidth variant='contained' onClick={handleKakaoLogin} >카카오 로그인</Button>
-                    <Button fullWidth variant='contained' onClick={handleNaverLogin} >네이버 로그인</Button>
+                    <IconButton onClick={handleKakaoLogin}>
+                        <Image src="/images/kakao.png" alt="카카오 로그인" width={200} height={50} />
+                    </IconButton>
+                    <IconButton onClick={handleNaverLogin}>
+                        <Image src="/images/naver.png" alt="네이버 로그인" width={200} height={50} />
+                    </IconButton>
                     <Button fullWidth variant='contained' onClick={handleGoogleLogin} >google 로그인</Button>
                     <Button fullWidth variant='contained' onClick={joinSite} >회원가입</Button>
                 </Stack>

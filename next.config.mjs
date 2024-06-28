@@ -22,12 +22,20 @@ const nextConfig = {
                 destination : "http://localhost:8080/api/userInfo"
             },
             {
+                source : "/api/joinUser",
+                destination : "http://localhost:8080/api/joinUser"
+            },
+            {
                 source : "/api/freeBoard",
                 destination : "http://localhost:8080/api/freeBoard"
             },
             {
                 source : "/api/freeBoardDetail",
                 destination : "http://localhost:8080/api/freeBoardDetail"
+            },
+            {
+                source : "/api/writeFreeboard",
+                destination : "http://localhost:8080/api/writeFreeboard"
             },
             {
                 source : "/api/tradeboard",
@@ -42,8 +50,12 @@ const nextConfig = {
                 destination : "http://localhost:8080/api/writeTrade"
             },
             {
-                source : "/api/public-data",
-                destination : "http://localhost:8080/api/public-data"
+                source : "/api/public",
+                destination : "http://localhost:8080/api/publi"
+            },
+            {
+                source : "/api/upload",
+                destination : "http://localhost:8080/api/upload"
             }
         ];
     }

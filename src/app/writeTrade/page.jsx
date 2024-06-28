@@ -1,43 +1,52 @@
-"use client"
+"use client";
 import { useState } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default function WriteTrade() {
     const [formState, setFormState] = useState({
         id: '',
-        password: '',
+        pw: '',
         title: '',
-        content: '',
-        image: null
+        content: ''
     });
 
     const handleChange = (e) => {
-        setFormState({
-            ...formState,
-            [e.target.name]: e.target.value
-        });
+        const { name, value } = e.target;
+        setFormState((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
-    const handleFileChange = (e) => {
-        setFormState({
-            ...formState,
-            image: e.target.files[0] 
-        });
+    const handleContentChange = (event, editor) => {
+        const data = editor.getData();
+        setFormState((prevState) => ({
+            ...prevState,
+            content: data
+        }));
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
-
+        e.preventDefault();
         try {
-            const response = await axios.post('/api/writeTrade', formState);
-
+            const response = await axios.post('http://localhost:8080/api/writeTrade', formState);
             console.log('데이터 저장 성공:', response.data);
-
         } catch (error) {
             console.error('데이터 저장 오류:', error);
         }
     };
+
+    const editorConfiguration = {
+        ckfinder: {
+            uploadUrl: 'http://localhost:8080/api/upload' // 파일 업로드 엔드포인트 설정
+        },
+        height: '400px' // 높이 조절
+    };
+
+    const initialText = '<p>내용을 입력하세요...</p>';
 
     return (
         <Container>
@@ -46,11 +55,16 @@ export default function WriteTrade() {
             </Typography>
             <form onSubmit={handleSubmit}>
                 <TextField type="text" name="id" label="ID" value={formState.id} onChange={handleChange} fullWidth margin="normal" required />
-                <TextField type="password" name="password" label="Password" value={formState.password} onChange={handleChange} fullWidth margin="normal" required />
+                <TextField type="password" name="pw" label="Password" value={formState.pw} onChange={handleChange} fullWidth margin="normal" required />
                 <TextField type="text" name="title" label="제목" value={formState.title} onChange={handleChange} fullWidth margin="normal" required />
-                <TextField type="text" name="content" label="내용" multiline rows={4} value={formState.content} onChange={handleChange} fullWidth margin="normal" required />
-                <input type="file" name="image" onChange={handleFileChange} style={{ marginTop: '20px' }} />
-                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
+                <CKEditor
+                        name="content"
+                        editor={ClassicEditor}
+                        config={editorConfiguration}
+                        data={initialText}
+                        onChange={handleContentChange}
+                    />
+                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }} >
                     작성 완료
                 </Button>
             </form>

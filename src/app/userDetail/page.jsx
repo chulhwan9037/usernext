@@ -1,14 +1,25 @@
 "use client"
 
 import { Container, List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
+import { observer } from "mobx-react-lite";
+import { useContext } from "react";
+import { MenuContext } from "@/stores/StoreContext";
 
-export default function UserDetail({userInfo}) {
+const UserDetail = observer(() => {
+    const menuStore = useContext(MenuContext);
+    const userInfo = menuStore.userInfo;
 
-    if (!userInfo) {
+    if (!userInfo.id) {
         return <Typography variant="h6">Loading...</Typography>;
     }
 
-    const { id, name, email, provider ,phone} = userInfo;
+    const { 
+        id, 
+        name, 
+        email, 
+        provider,
+        phone
+    } = userInfo;
 
     return (
         <Container>
@@ -36,6 +47,6 @@ export default function UserDetail({userInfo}) {
             </Paper>
         </Container>
     );
-};
+});
 
-
+export default UserDetail;

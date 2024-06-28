@@ -54,18 +54,18 @@ function Sidebar(){
             } catch (error) {
                 alert("실패")
             }
-        }else if(menu === "public"){
-            try {
+        }else if(menu === "publictransport"){
+           /*  try { 
                 const response = await axios.get("/api/public",{
                     headers :{
                         Authorization:  `Bearer ${menuStore.token}`
                     }
                 });
                 // 가지고 온 리스트를 MobX에 저장하자
-                menuStore.setPublicInfo(response.data)
+                menuStore.setPublicInfo(response.data) 
             } catch (error) {
                 alert("실패")
-            }
+            } */
         }
     }
 
@@ -83,9 +83,9 @@ function Sidebar(){
                 </ListItemButton>   
                 <ListItemButton onClick={() => handleMenuClick("tradelist")}>
                     <ListItemIcon><AccountCircle /></ListItemIcon>
-                    <ListItemText primary="Trade List" />
+                    <ListItemText primary="중고거래 게시판" />
                 </ListItemButton>   
-                <ListItemButton onClick={() => handleMenuClick("public")}>
+                <ListItemButton onClick={() => handleMenuClick("publictransport")}>
                     <ListItemIcon><AccountCircle /></ListItemIcon>
                     <ListItemText primary="대중교통정보" />
                 </ListItemButton>   

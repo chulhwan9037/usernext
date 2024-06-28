@@ -3,13 +3,13 @@ import { MenuContext } from "@/stores/StoreContext";
 import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import { observer } from "mobx-react-lite";
-import { useRouter } from "next/navigation"; // 변경된 부분
+import { useRouter } from "next/navigation"; 
 import { useContext } from "react";
 
 function TradeList({ tradeList }) {
   const API_URL = "/api/detailTrade";
   const menuStore = useContext(MenuContext);
-  const router = useRouter(); // 변경된 부분
+  const router = useRouter();
 
   const handleDetailClick = async (menu, idx) => {
     menuStore.setSelectedMenu(menu);
@@ -33,6 +33,7 @@ function TradeList({ tradeList }) {
     menuStore.setSelectedMenu(menu);
     if(menu === 'writetrade'){
       try {
+        
 
       } catch (error) {
         alert("글쓰러 가기 실패")
@@ -74,10 +75,7 @@ function TradeList({ tradeList }) {
             </Grid>
           ))}
       </Grid>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => handleWriteClick("writetrade")} // 변경된 부분
+      <Button variant="contained" color="primary" onClick={() => handleWriteClick("writetrade")} 
         style={{ marginTop: "20px" }}
       >
         글쓰기

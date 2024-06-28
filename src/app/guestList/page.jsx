@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useContext } from 'react';
-import { Box, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper } from '@mui/material';
+import { Box, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper, Button } from '@mui/material';
 import Link from 'next/link';
 import axios from 'axios';
 import { MenuContext } from '@/stores/StoreContext';
@@ -32,6 +32,16 @@ function GuestList({ guestList }) {
         }
     }
 
+    const handleWriteClick = async (menu) => {
+        menuStore.setSelectedMenu(menu);
+        if(menu === 'writefree'){
+          try {
+    
+          } catch (error) {
+            alert("글쓰러 가기 실패")
+          }
+        }
+      }
 
     return (
         <Container>
@@ -64,6 +74,7 @@ function GuestList({ guestList }) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Button variant="contained" color="primary" onClick={() => handleWriteClick("writefree")} style={{ marginTop: "20px" }} > 글쓰기 </Button>
         </Container>
     );
 }

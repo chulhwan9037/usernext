@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { MenuContext } from "@/stores/StoreContext";
 import { observer } from "mobx-react-lite";
 
-function TopBar({ setSidebarOpen, sidebarOpen }) {
+function TopBar() {
     const menuStore = useContext(MenuContext);
     const router = useRouter();
     const API_URL = '/api/userInfo';
@@ -18,15 +18,15 @@ function TopBar({ setSidebarOpen, sidebarOpen }) {
         if (menu === 'userdetail') {
             try {
                 const response = await axios.get(API_URL, {
-                    headers: {
-                        Authorization: `Bearer ${menuStore.token}`
+                    params: {
+                        token: menuStore.token
                     }
                 });
                 console.log("데이터", response.data);
                 menuStore.setUserInfo(response.data);
             } catch (error) {
                 console.error("요청 실패:", error);
-                alert("실패임");
+                alert("사용자 정보를 가져오는데 실패했습니다.");
             }
         }
     };
