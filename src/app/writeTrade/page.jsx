@@ -4,6 +4,7 @@ import { Container, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { useRouter } from 'next/navigation';
 
 export default function WriteTrade() {
     const [formState, setFormState] = useState({
@@ -12,6 +13,8 @@ export default function WriteTrade() {
         title: '',
         content: ''
     });
+
+    const router = useRouter();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -32,8 +35,9 @@ export default function WriteTrade() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/api/writeTrade', formState);
+            const response = await axios.post('/api/writeTrade', formState);
             console.log('데이터 저장 성공:', response.data);
+            router.push('/api/tradeboard')
         } catch (error) {
             console.error('데이터 저장 오류:', error);
         }
@@ -41,7 +45,7 @@ export default function WriteTrade() {
 
     const editorConfiguration = {
         ckfinder: {
-            uploadUrl: 'http://localhost:8080/api/upload' // 파일 업로드 엔드포인트 설정
+            uploadUrl: '/api/upload' // 파일 업로드 엔드포인트 설정
         },
         height: '400px' // 높이 조절
     };
