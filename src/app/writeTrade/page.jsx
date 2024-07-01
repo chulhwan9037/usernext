@@ -4,7 +4,6 @@ import { Container, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { useRouter } from 'next/navigation';
 import { MenuContext } from '@/stores/StoreContext';
 
 export default function WriteTrade() {
@@ -16,7 +15,6 @@ export default function WriteTrade() {
     });
 
     const menuStore = useContext(MenuContext)
-    const router = useRouter();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,7 +37,12 @@ export default function WriteTrade() {
         try {
             const response = await axios.post('/api/writeTrade', formState);
             console.log('데이터 저장 성공:', response.data);
-            menuStore.setTradeList(response.data)
+            const response1 = await axios.get('/api/tradeboard',{
+                headers :{
+                    Authorization:  `Bearer ${menuStore.token}`
+                }
+            });
+            menuStore.setTradeList(response1.data)
         } catch (error) {
             console.error('데이터 저장 오류:', error);
         }
