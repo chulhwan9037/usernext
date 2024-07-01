@@ -1,10 +1,11 @@
 "use client";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useRouter } from 'next/navigation';
+import { MenuContext } from '@/stores/StoreContext';
 
 export default function WriteTrade() {
     const [formState, setFormState] = useState({
@@ -14,6 +15,7 @@ export default function WriteTrade() {
         content: ''
     });
 
+    const menuStore = useContext(MenuContext)
     const router = useRouter();
 
     const handleChange = (e) => {
@@ -37,7 +39,7 @@ export default function WriteTrade() {
         try {
             const response = await axios.post('/api/writeTrade', formState);
             console.log('데이터 저장 성공:', response.data);
-            router.push('/api/tradeboard')
+            menuStore.setTradeList(response.data)
         } catch (error) {
             console.error('데이터 저장 오류:', error);
         }
