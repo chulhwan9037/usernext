@@ -1,14 +1,12 @@
 "use client"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { useRouter } from 'next/navigation';
+import { MenuContext } from '@/stores/StoreContext';
 
 export default function WriteFree() {
 
-    const router = useRouter();
+    const menuStore = useContext(MenuContext)
     const [formState, setFormState] = useState({
         id: '',
         pw: '',
@@ -23,16 +21,40 @@ export default function WriteFree() {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, menu) => {
         e.preventDefault(); 
-
+        menuStore.setSelectedMenu(menu);
+        if(menu === 'guestlist'){
         try {
             const response = await axios.post('/api/writeFreeboard', formState);
-
             console.log('데이터 저장 성공:', response.data);
-            router.push('/main')
+
+            const getresponse = await axios.get('/api/freeBoard',{
+                headers :{
+                    Authorization:  `Bearer ${menuStore.token}`
+                }
+            });
+            menuStore.setGuestList(getresponse.data)
         } catch (error) {
             console.error('데이터 저장 오류:', error);
+        }
+    }
+    };
+
+    const handleBack = async (e, menu) => {
+        e.preventDefault();
+        menuStore.setSelectedMenu(menu);
+        if (menu === 'guestlist'){
+            try {
+                const response = await axios.get('/api/freeBoard', {
+                headers: {
+                    Authorization: `Bearer ${menuStore.token}`
+                }
+            });
+                menuStore.setGuestList(response.data);
+            } catch (error) {
+                console.error("데이터 저장 오류:", error)
+            }
         }
     };
 
@@ -41,7 +63,7 @@ export default function WriteFree() {
             <Typography variant="h4" gutterBottom>
                 글쓰기 페이지
             </Typography>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => handleSubmit(e, 'guestlist')}>
                 <TextField type="text" name="id" label="ID" value={formState.id} onChange={handleChange} fullWidth margin="normal" required />
                 <TextField type="password" name="pw" label="Password" value={formState.password} onChange={handleChange} fullWidth margin="normal" required />
                 <TextField type="text" name="title" label="제목" value={formState.title} onChange={handleChange} fullWidth margin="normal" required />
@@ -49,6 +71,7 @@ export default function WriteFree() {
                 <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
                     작성 완료
                 </Button>
+                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }} onClick={(e) => handleBack(e, 'guestlist')}>돌아가기</Button>
             </form>
         </Container>
     );

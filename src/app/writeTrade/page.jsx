@@ -5,16 +5,19 @@ import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MenuContext } from '@/stores/StoreContext';
+import { observer } from 'mobx-react-lite';
 
-export default function WriteTrade() {
+function WriteTrade() {
+    const menuStore = useContext(MenuContext)
+    const userInfo = menuStore.userInfo;
+    
+
     const [formState, setFormState] = useState({
-        id: '',
+        id: userInfo.id,
         pw: '',
         title: '',
         content: ''
     });
-
-    const menuStore = useContext(MenuContext)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -32,19 +35,45 @@ export default function WriteTrade() {
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, menu) => {
         e.preventDefault();
+        menuStore.setSelectedMenu(menu);
+        if (menu === 'tradelist'){
         try {
-            const response = await axios.post('/api/writeTrade', formState);
-            console.log('데이터 저장 성공:', response.data);
-            const response1 = await axios.get('/api/tradeboard',{
-                headers :{
-                    Authorization:  `Bearer ${menuStore.token}`
+            // 데이터 저장 요청
+            const postResponse = await axios.post('/api/writeTrade', formState);
+            console.log('데이터 저장 성공:', postResponse.data);
+    
+            // 저장 후 데이터 조회 요청
+            const getResponse = await axios.get('/api/tradeboard', {
+                headers: {
+                    Authorization: `Bearer ${menuStore.token}`
                 }
             });
-            menuStore.setTradeList(response1.data)
+    
+            // 조회한 데이터 상태 업데이트
+            menuStore.setTradeList(getResponse.data);
         } catch (error) {
             console.error('데이터 저장 오류:', error);
+        }
+        }
+    };
+    
+
+    const handleBack = async (e, menu) => {
+        e.preventDefault();
+        menuStore.setSelectedMenu(menu);
+        if (menu === 'tradelist'){
+            try {
+                const response = await axios.get('/api/tradeboard', {
+                headers: {
+                    Authorization: `Bearer ${menuStore.token}`
+                }
+            });
+                menuStore.setTradeList(response.data);
+            } catch (error) {
+                console.error("데이터 저장 오류:", error)
+            }
         }
     };
 
@@ -62,21 +91,23 @@ export default function WriteTrade() {
             <Typography variant="h4" gutterBottom>
                 글쓰기 페이지
             </Typography>
-            <form onSubmit={handleSubmit}>
-                <TextField type="text" name="id" label="ID" value={formState.id} onChange={handleChange} fullWidth margin="normal" required />
+            <form onSubmit={(e) => handleSubmit(e, 'tradelist')}> 
+                <TextField type="text" name="id" label="ID" value={userInfo.id} fullWidth margin="normal" required readOnly />
                 <TextField type="password" name="pw" label="Password" value={formState.pw} onChange={handleChange} fullWidth margin="normal" required />
                 <TextField type="text" name="title" label="제목" value={formState.title} onChange={handleChange} fullWidth margin="normal" required />
                 <CKEditor
-                        name="content"
-                        editor={ClassicEditor}
-                        config={editorConfiguration}
-                        data={initialText}
-                        onChange={handleContentChange}
-                    />
-                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }} >
+                    name="content"
+                    editor={ClassicEditor}
+                    config={editorConfiguration}
+                    data={initialText}
+                    onChange={handleContentChange}
+                />
+                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
                     작성 완료
                 </Button>
+                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }} onClick={(e) => handleBack(e, 'tradelist')}>돌아가기</Button>
             </form>
         </Container>
     );
 }
+export default observer(WriteTrade);

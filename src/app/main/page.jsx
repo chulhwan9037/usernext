@@ -18,6 +18,8 @@ import UserDetail from "../userDetail/page";
 import DetailTrade from "../detailTrade/page";
 import WriteTrade from "../writeTrade/page";
 import WriteFree from "../writefree/page";
+import InfoEdit from "../infoEdit/page";
+import UpdateTrade from "../updateTrade/page";
 
 
 
@@ -56,6 +58,8 @@ function Main(){
             return <TradeList tradeList={menuStore.tradeList}/>;
           case "detailtrade" :
             return <DetailTrade detailTrade={menuStore.detailTrade}/>;
+          case "updatetrade" :
+            return <UpdateTrade updateTrade={menuStore.updateTrade}/>;
           case "writetrade" :
             return <WriteTrade writeTrade={menuStore.writeTrade}/>;
           case "writefree" :
@@ -64,6 +68,8 @@ function Main(){
             return <PublicTransport publicTransport={menuStore.publicTransport}/>;
           case "userdetail" :
             return <UserDetail userDetail={menuStore.userDetail}/>;
+          case "infoedit" :
+            return <InfoEdit InfoEdit={menuStore.infoEdit}/>;
           default:
             return <MainPage />
        }

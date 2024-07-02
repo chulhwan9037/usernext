@@ -22,6 +22,14 @@ const nextConfig = {
                 destination : "http://localhost:8080/api/userInfo"
             },
             {
+                source : "/api/infoEdit",
+                destination : "http://localhost:8080/api/infoEdit"
+            },
+            {
+                source : "/api/changePassword",
+                destination : "http://localhost:8080/api/changePassword"
+            },
+            {
                 source : "/api/joinUser",
                 destination : "http://localhost:8080/api/joinUser"
             },
@@ -48,6 +56,14 @@ const nextConfig = {
             {
                 source : "/api/writeTrade",
                 destination : "http://localhost:8080/api/writeTrade"
+            },
+            {
+                source : "/api/deleteTrade",
+                destination : "http://localhost:8080/api/deleteTrade"
+            },
+            {
+                source : "/api/updateTrade",
+                destination : "http://localhost:8080/api/updateTrade"
             },
             {
                 source : "/api/public",

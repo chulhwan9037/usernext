@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
 function TradeList({ tradeList }) {
+
   const API_URL = "/api/detailTrade";
   const menuStore = useContext(MenuContext);
   const router = useRouter();
@@ -33,8 +34,13 @@ function TradeList({ tradeList }) {
     menuStore.setSelectedMenu(menu);
     if(menu === 'writetrade'){
       try {
-        
-
+        const response = await axios.get('/api/userInfo', {
+          params: {
+              token: menuStore.token
+          }
+      });
+        console.log("데이터", response.data);
+        menuStore.setUserInfo(response.data);
       } catch (error) {
         alert("글쓰러 가기 실패")
       }
@@ -61,6 +67,12 @@ function TradeList({ tradeList }) {
                     alt={"이미지 없음"}
                     style={{ width: "100%", height: "auto", marginBottom: "10px" }}
                   />
+                  <Typography
+                    variant="subtitle1"
+                    style={{ textDecoration: "underline", color: "blue" }}
+                  >
+                    {k.id}
+                  </Typography>
                   <Typography
                     variant="subtitle1"
                     style={{ textDecoration: "underline", color: "blue" }}

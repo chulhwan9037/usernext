@@ -44,8 +44,8 @@ class MenuStore{
     };
     writeTrade = [];
     writeFree = [];
-
-
+    infoEdit =[] ;
+    updateTrade =[];
     constructor(){
         // MobX 스토어를 자동으로 관찰 가능하게 설정
         makeAutoObservable(this);
@@ -99,6 +99,9 @@ class MenuStore{
     setUserInfo(userInfo){
         this.userInfo = userInfo;
     }
+    setInfoEdit(infoEdit){
+        this.infoEdit = infoEdit;
+    }
     setTradeList(tradeList){
         this.tradeList = tradeList;
     }
@@ -107,6 +110,9 @@ class MenuStore{
     }
     setWriteTrade(writeTrade){
         this.writeTrade = writeTrade;
+    }
+    setUpdateTrade(updateTrade){
+        this.updateTrade = updateTrade;
     }
     setWriteFree(writeFree){
         this.writeFree = writeFree;
